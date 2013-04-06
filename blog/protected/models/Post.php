@@ -22,7 +22,7 @@ class Post extends CActiveRecord
     const STATUS_DRAFT=1;
     const STATUS_PUBLISHED=2;
     const STATUS_ARCHIVED=3;
-    
+
     /**
      * Returns the static model of the specified AR class.
      *
@@ -136,5 +136,16 @@ class Post extends CActiveRecord
     public function normalizeTags($attribute, $params)
     {
         $this->tags = Tag::array2string(array_unique(Tag::string2array($this->tags)));
+    }
+
+    public function behaviors(){
+
+        return array(
+            'myTimeStamp' => array(
+                'class' => 'application.components.myTimeStamp',
+                'createDate' => 'create_time',
+                'updateDate' => 'update_time'
+            )
+        );
     }
 }
