@@ -41,22 +41,26 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 </div><!-- search-form -->
 
 <?php $this->widget('zii.widgets.grid.CGridView', array(
-	'id'=>'post-grid',
-	'dataProvider'=>$model->search(),
-	'filter'=>$model,
-	'columns'=>array(
-		'id',
-		'title',
-		'content',
-		'tags',
-		'status',
-		'create_time',
-		/*
-		'update_time',
-		'author_id',
-		*/
-		array(
-			'class'=>'CButtonColumn',
-		),
-	),
-)); ?>
+        'dataProvider'=>$model->search(),
+        'filter'=>$model,
+        'columns'=>array(
+            array(
+                'name'=>'title',
+                'type'=>'raw',
+                'value'=>'CHtml::encode($data->title)'
+            ),
+            array(
+                'name'=>'status',
+                'value'=>'Lookup::item("PostStatus",$data->status)',
+                'filter'=>Lookup::items('PostStatus'),
+            ),
+            array(
+                'name'=>'create_time',
+                'type'=>'datetime',
+                'filter'=>false,
+            ),
+            array(
+                'class'=>'CButtonColumn',
+            ),
+        ),
+    )); ?>
