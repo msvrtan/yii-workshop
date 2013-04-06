@@ -57,7 +57,8 @@ return array(
 			'username' => 'root',
 			'password' => 'n0p455',
 			'charset' => 'utf8',
-            'tablePrefix' => 'tbl_'
+            'tablePrefix' => 'tbl_',
+            'enableParamLogging' => true
 		),
 		'errorHandler'=>array(
 			// use 'site/error' action to display errors
